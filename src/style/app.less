@@ -1,0 +1,254 @@
+@import "./variable.less";
+/* Box sizing rules */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+/* Remove default padding */
+ul,
+ol,
+li {
+  padding: 0;
+  list-style: none;
+}
+
+/* Remove default margin */
+body,
+h1,
+h2,
+h3,
+h4,
+p,
+ul[class],
+ol[class],
+figure,
+blockquote,
+dl,
+dd {
+  margin: 0;
+}
+
+html,
+body,
+#app {
+  height: 100%;
+}
+
+/* Set core body defaults */
+body {
+  min-height: 100vh;
+  scroll-behavior: smooth;
+  text-rendering: optimizeSpeed;
+  line-height: 1.5;
+  overflow: hidden;
+  font-size: 12px !important;
+  color: @font-color;
+}
+
+/* Remove list styles on ul, ol elements with a class attribute */
+ul[class],
+ol[class] {
+  list-style: none;
+}
+
+/* A elements that don't have a class get default styles */
+a:not([class]) {
+  text-decoration-skip-ink: auto;
+}
+
+/* Inherit fonts for inputs and buttons */
+input,
+button,
+textarea,
+select {
+  font: inherit;
+}
+
+/* Blur images when they have no alt attribute */
+/* img:not([alt]) {
+  filter: blur(10px);
+} */
+
+/* Remove all animations and transitions for people that prefer not to see them */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+  /*background-color: #F5F5F5;*/
+}
+
+::-webkit-scrollbar-track {
+  // -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+  background-color: #ffffff;
+}
+
+::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  background: #dadfe6;
+}
+
+.flexbox {
+  display: flex;
+}
+
+.flexbox-vertical {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.flex-wrap {
+  flex-wrap: wrap;
+}
+
+.flex-1 {
+  flex: 1;
+}
+
+.flex-auto {
+  flex: auto;
+}
+
+.flex-center {
+  align-items: center;
+  justify-content: center;
+}
+
+.flex-center-vertical {
+  align-items: center;
+}
+
+.flex-center-horizontal {
+  justify-content: center;
+}
+
+.flex-around {
+  align-items: center;
+  justify-content: space-around;
+}
+
+.flex-between {
+  align-items: center;
+  justify-content: space-between;
+}
+
+.flex-start-between {
+  align-items: flex-start;
+  justify-content: space-between;
+}
+
+.pointer {
+  cursor: pointer;
+}
+
+.font {
+  font-size: 14px;
+}
+.font-small {
+  font-size: @font-size-small;
+}
+
+.font-bold {
+  font-weight: bold;
+}
+
+.inline-block {
+  display: inline-block;
+}
+
+.text-right {
+  text-align: right;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.left {
+  float: left;
+}
+.right {
+  float: right;
+}
+
+// 超过显示省略号——单行
+.ellipsis {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+// 超过显示省略号——多行
+.text-ellipsis-multiple {
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.absolute-center {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+// 右间隔
+.spacing-right {
+  margin-right: @spacing; // 8px
+}
+
+.spacing-large-right {
+  margin-right: @spacing-large; // 12px
+}
+
+.spacing-small-right {
+  margin-right: @spacing-small; // 4px
+}
+// 左间隔
+.spacing-left {
+  margin-left: @spacing; // 8px
+}
+
+.spacing-large-left {
+  margin-left: @spacing-large; // 12px
+}
+
+.spacing-small-left {
+  margin-left: @spacing-small; // 4px
+}
+
+.font-color {
+  color: @font-color;
+}
+
+.error-color {
+  color: @error-color;
+}
+
+.success-color {
+  color: @success-color;
+}
+
+.active-color {
+  color: @active-color;
+}
+
+.main-background {
+  background-color: @main-background-color;
+}
+
+//高度百分比
+.height-full {
+  height: 100%;
+}

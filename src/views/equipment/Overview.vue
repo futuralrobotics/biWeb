@@ -1,5 +1,10 @@
 <template>
-  <list ref="myList" :automaticMaxHeight="true" :getData="init">
+  <list
+    ref="myList"
+    :automaticMaxHeight="true"
+    :autoInit="false"
+    :getData="init"
+  >
     <div slot="topbar">
       <country-code
         class="spacing-large-right"
@@ -18,7 +23,7 @@
       :formatter="formatterType"
     >
     </el-table-column>
-    <el-table-column prop="rosSn" label="SN"> </el-table-column>
+    <el-table-column prop="androidSn" label="SN"> </el-table-column>
     <el-table-column
       label="地区"
       :formatter="formatterCountry"
@@ -79,6 +84,10 @@ export default class EquipmentOverview extends Vue {
   type = "-1";
   country = "-1";
 
+  mounted() {
+    this.$refs.myList.setTargetPage(window.sessionStorage.overviewPage || 1);
+  }
+
   async init(pageNum: number, pageSize: number) {
     return await getAllDeviceInfo({
       pageNum,
@@ -120,6 +129,7 @@ export default class EquipmentOverview extends Vue {
       );
       if (data?.value) {
         await addDevice(data?.value);
+        this.clickSearch();
       }
       this.$message.success("添加成功");
     } catch (error) {
@@ -134,6 +144,7 @@ export default class EquipmentOverview extends Vue {
         id,
       },
     });
+    window.sessionStorage.overviewPage = this.$refs.myList.getPage();
   }
 }
 </script>

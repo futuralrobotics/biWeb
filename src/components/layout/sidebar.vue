@@ -33,7 +33,7 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue } from "vue-property-decorator";
+import { Component, Vue, Watch } from "vue-property-decorator";
 
 interface MenuItem {
   path: string;
@@ -105,10 +105,12 @@ export default class Sidebar extends Vue {
     return this.$store.state.roleId < 3 ? [...menu, account] : menu;
   }
 
-  created() {
-    this.currentMenu = this.$route.path;
+  @Watch("$route.path", {
+    immediate: true,
+  })
+  routeChange(val: any) {
+    this.currentMenu = val;
     this.active = this.currentMenu.split("/")[1];
-
     this.setCurrentMenu();
   }
 
@@ -137,7 +139,6 @@ export default class Sidebar extends Vue {
     if (this.$route.path === path) {
       return;
     }
-    this.currentMenu = path;
     this.$router.push(path);
   }
 }

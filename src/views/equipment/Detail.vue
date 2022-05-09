@@ -49,6 +49,7 @@ export default class EquipmentDetail extends Vue {
 
   async init() {
     this.error = "";
+    this.dataList = [];
     if (!this.search) {
       return;
     }
@@ -111,6 +112,10 @@ export default class EquipmentDetail extends Vue {
   }
 
   clickSearch() {
+    if (!this.search) {
+      this.error = "请先输入SN";
+      return;
+    }
     this.init();
   }
 

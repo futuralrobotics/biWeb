@@ -36,7 +36,7 @@
     <el-table-column prop="name" label="任务名称"> </el-table-column>
     <el-table-column prop="time" label="任务时间" :formatter="showTime">
     </el-table-column>
-    <el-table-column prop="needTime" label="耗时"> </el-table-column>
+    <!-- <el-table-column prop="needTime" label="耗时"> </el-table-column> -->
     <el-table-column prop="powerConsume" label="耗电"> </el-table-column>
     <el-table-column prop="repeatCount" label="循环次数"> </el-table-column>
     <el-table-column prop="pointsCount" label="点位数"> </el-table-column>
@@ -71,7 +71,7 @@ export default class Default extends Vue {
   $moment: any;
   sn: any = "";
   time = [
-    new Date(new Date().setHours(0, 0, 0, 0)),
+    new Date(new Date().setHours(0, 0, 0, 0) - 7 * 24 * 60 * 60 * 1000),
     new Date(new Date().setHours(0, 0, 0, 0) + 24 * 60 * 60 * 1000 - 1),
   ];
 
@@ -113,7 +113,7 @@ export default class Default extends Vue {
   async init(pageNum: number, pageSize: number) {
     console.log(this.time);
     if (!this.sn) {
-      return;
+      return [];
     }
     const search: any = {
       sn: this.sn,
@@ -131,8 +131,8 @@ export default class Default extends Vue {
       ...data,
       list: data.list.map((item: any) => {
         item.detailLogs = JSON.parse(item.detailLogs);
-        const diffTime = item.endTime - item.startTime;
-        item.needTime = diffTime > 0 ? transformTime(diffTime) : "";
+        // const diffTime = item.endTime - item.startTime;
+        // item.needTime = diffTime > 0 ? transformTime(diffTime) : "";
         return item;
       }),
     };

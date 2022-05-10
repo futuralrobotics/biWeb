@@ -25,7 +25,11 @@
               label="账号"
               prop="userEmail"
             >
-              <el-input clearable v-model="login.userEmail"></el-input>
+              <el-input
+                placeholder="请输入账号"
+                clearable
+                v-model="login.userEmail"
+              ></el-input>
             </el-form-item>
             <el-form-item
               :rules="[{ required: true, message: '密码不能为空' }]"
@@ -33,6 +37,7 @@
               prop="password"
             >
               <el-input
+                placeholder="请输入密码"
                 clearable
                 show-password
                 type="password"

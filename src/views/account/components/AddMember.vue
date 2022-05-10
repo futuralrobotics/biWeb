@@ -200,6 +200,7 @@ export default class AddMember extends Vue {
             await createUser({ ...this.form });
             this.$message.success("添加成功");
           }
+          this.$emit("ok");
           this.dialogFormVisible = false;
         } catch (error) {
           console.log(error);

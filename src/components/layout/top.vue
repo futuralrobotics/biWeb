@@ -7,8 +7,9 @@
       </div>
     </el-popover>
     <div class="screen" @click="gotoOverview">
-      <i class="el-icon-data-line"></i>
-      我的大屏
+      <router-link target="_blank" :to="{ path: '/overview' }"
+        ><i class="el-icon-data-line"></i> 我的大屏</router-link
+      >
     </div>
   </div>
 </template>
@@ -19,11 +20,12 @@ import { Component, Vue } from "vue-property-decorator";
 @Component
 export default class Top extends Vue {
   gotoLogin() {
+    this.$store.commit("SET_TOKEN", "");
     this.$router.push("/login");
   }
 
   gotoOverview() {
-    this.$router.push("/overview");
+    this.$router.resolve("/overview");
   }
 }
 </script>

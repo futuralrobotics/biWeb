@@ -20,6 +20,7 @@
       :page-size="pageSize"
       layout="total, prev, pager, next, jumper"
       :total="total"
+      v-if="total"
     >
     </el-pagination>
   </div>
@@ -34,6 +35,7 @@ export default class List extends Vue {
   $refs: any;
   @Prop() getData?: Function;
   @Prop() automaticMaxHeight?: boolean;
+  @Prop({ default: true }) autoInit?: boolean;
   @Prop({ default: () => [] }) data?: Array<any>;
 
   tableData: Array<any> = [];
@@ -52,12 +54,12 @@ export default class List extends Vue {
     immediate: true,
   })
   dataChange(val: any) {
+    this.pageNo = 1;
     if (val && val.length > 0) {
       this.allData = val;
       this.total = val.length;
       this.tableData = this.allData.slice(0, this.pageSize);
     } else {
-      this.pageNo = 1;
       this.tableData = this.allData = [];
     }
   }
@@ -68,7 +70,7 @@ export default class List extends Vue {
         this.maxHeight = this.$refs.myTable.$el.offsetHeight;
       });
     }
-    this.init();
+    this.autoInit && this.init();
   }
 
   async init(pageNo?: number) {
@@ -88,12 +90,23 @@ export default class List extends Vue {
     }
   }
 
+  getPage() {
+    return this.pageNo;
+  }
+
   async handleCurrentChange(pageNo: number) {
+    debugger;
     this.init(pageNo);
   }
 
   refresh() {
     this.init(1);
+  }
+
+  setTargetPage(pageNo: number) {
+    const myPageNo = Number(pageNo);
+    this.pageNo = myPageNo;
+    this.init(myPageNo);
   }
 }
 </script>

@@ -1,14 +1,14 @@
 <template>
   <list :automaticMaxHeight="true" :data="data">
     <div slot="topbar">
-      <add-member class="right"></add-member>
+      <add-member class="right" @ok="refresh"></add-member>
     </div>
     <el-table-column prop="userName" label="账户"> </el-table-column>
     <el-table-column prop="rosSn" label="身份" :formatter="formatter">
     </el-table-column>
     <el-table-column label="操作" width="120">
       <template slot-scope="scope">
-        <add-member :data="scope.row"></add-member>
+        <add-member :data="scope.row" @ok="refresh"></add-member>
       </template>
     </el-table-column>
   </list>
@@ -45,6 +45,10 @@ export default class Member extends Vue {
     return this.roles.find(
       (item: { id: string; name: string }) => item.id === row.roleId
     )?.name;
+  }
+
+  refresh() {
+    this.init();
   }
 }
 </script>

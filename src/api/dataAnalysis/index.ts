@@ -2,15 +2,11 @@ import HttpService from '../request';
 import store from "@/store";
 
 export function getDeviceAnalyzeData(params: any): Promise<any> {
-  return HttpService.httpPost("/bi/getDeviceAnalyzeData", {
-    ...params,
-    "userId": store.state.userId
-  });
+  const send: any = { ...params, "userId": store.state.userId };
+  return HttpService.httpPost("/bi/getDeviceAnalyzeData", send);
 }
 
 export function getTaskAnalyzeData(params: any): Promise<any> {
-  return HttpService.httpPost("/bi/getTaskAnalyzeData", {
-    ...params,
-    "userId": store.state.userId
-  });
+  const send: any = { ...params, "userId": store.state.userId };
+  return HttpService.httpPost("/bi/getTaskAnalyzeData", send);
 }

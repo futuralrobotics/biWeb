@@ -8,20 +8,29 @@
       <robot-type class="spacing-large-right" v-model="type"></robot-type>
       <el-button type="primary" @click="clickSearch">查询</el-button>
     </div>
+    <el-table-column width="80" prop="yearAndMonth" label="月份">
+    </el-table-column>
+    <el-table-column prop="workCountPerMonth" label="累计工作次数（月）">
+    </el-table-column>
     <el-table-column
-      width="80"
-      prop="type"
-      label="月份"
-      :formatter="formatterType"
+      prop="workTimePerMonth"
+      label="累计工作时间（月）"
+      :formatter="formatterWorkTimePerMonth"
+    ></el-table-column>
+    <el-table-column
+      label="平均工作时间（次）"
+      :formatter="averageWorkTimeEveryTime"
     >
     </el-table-column>
-    <el-table-column prop="rosSn" label="累计工作次数（月）"> </el-table-column>
-    <el-table-column label="累计工作时间（月）"></el-table-column>
-    <el-table-column prop="lastReportTime" label="平均工作时间（次）">
+    <el-table-column
+      label="平均工作时间（日）"
+      :formatter="averageWorkTimeEveryDay"
+    >
     </el-table-column>
-    <el-table-column label="平均工作时间（日）"> </el-table-column>
-    <el-table-column label="任务成功率"> </el-table-column>
-    <el-table-column label="任务失败率"> </el-table-column>
+    <el-table-column label="任务成功率" :formatter="successPercent">
+    </el-table-column>
+    <el-table-column label="任务失败率" :formatter="failPercent">
+    </el-table-column>
   </list>
 </template>
 
@@ -31,8 +40,7 @@ import { getTaskAnalyzeData } from "@/api/dataAnalysis";
 import RobotType from "@/components/select/RobotType.vue";
 import CountryCode from "@/components/select/CountryCode.vue";
 import List from "@/components/List.vue";
-import { robotStatus } from "@/constant";
-import moment from "moment";
+import { transformTime } from "@/utils";
 
 @Component({
   components: {
@@ -43,8 +51,9 @@ import moment from "moment";
 })
 export default class TaskAnalysis extends Vue {
   $refs: any;
+  $moment: any;
   type = 0;
-  country = "-1";
+  country = "all";
 
   async init(pageNum: number, pageSize: number) {
     return await getTaskAnalyzeData({
@@ -55,23 +64,29 @@ export default class TaskAnalysis extends Vue {
     });
   }
 
-  formatterType(row: any) {
-    const type = this.$store.state.robotType.find(
-      (item: any) => item.model === Number(row.type)
+  formatterWorkTimePerMonth(row: any) {
+    return transformTime(row.workTimePerMonth);
+  }
+
+  averageWorkTimeEveryTime(row: any) {
+    return transformTime(
+      Math.round(row.workTimePerMonth / row.workCountPerMonth)
     );
-    return (type && type.name) || row.type;
   }
-  formatterCountry(row: any) {
-    const country = this.$store.state.countryCode.find(
-      (item: any) => item.cc === row.countryCode
+  averageWorkTimeEveryDay(row: any) {
+    return transformTime(
+      Math.round(row.workTimePerMonth / this.$moment().daysInMonth())
     );
-    return (country && country.comment) || row.countryCode;
   }
-  formatterTime(row: any, column: any, cellValue: number) {
-    return moment(cellValue).format("YYYY-MM-DD hh:mm");
+  successPercent(row: any) {
+    return (
+      Math.round((row.successCount / row.workCountPerMonth) * 10000) / 100 + "%"
+    );
   }
-  formatterStatus(row: any) {
-    return robotStatus[row.status];
+  failPercent(row: any) {
+    return (
+      Math.round((row.failCount / row.workCountPerMonth) * 10000) / 100 + "%"
+    );
   }
   clickSearch() {
     this.$refs.myList.refresh();

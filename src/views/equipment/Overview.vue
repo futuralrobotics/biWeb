@@ -81,8 +81,8 @@ import { formatCountryCode, formatType } from "./data";
 export default class EquipmentOverview extends Vue {
   $moment: any;
   $refs: any;
-  type = "-1";
-  country = "-1";
+  type = -1;
+  country = "all";
 
   mounted() {
     this.$refs.myList.setTargetPage(window.sessionStorage.overviewPage || 1);

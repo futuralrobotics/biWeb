@@ -1,6 +1,5 @@
 import { robotStatus } from "@/constant";
 import store from "@/store";
-import moment from "moment";
 import { transformTime } from "@/utils";
 
 export const formatCountryCode = (value: string) => {

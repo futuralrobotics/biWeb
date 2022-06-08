@@ -33,8 +33,6 @@ export function transformTime(num: number, returnArray?: boolean) {
 
   const result = [];
 
-  console.log(value)
-
 
   while ((i === 1 && value > 23) || (i > 1 && value > 60) && i > 0) {
     let unit = i < 2 ? 24 : 60;

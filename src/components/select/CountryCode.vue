@@ -2,7 +2,7 @@
   <div class="inline-block">
     <span>国家或地区：</span>
     <el-select v-model="type" placeholder="请选择" @change="change">
-      <el-option label="全部" value="-1"></el-option>
+      <el-option label="全部" value="all"></el-option>
       <el-option
         v-for="item in countrys"
         :key="item.id"

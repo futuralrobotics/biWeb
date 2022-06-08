@@ -4,7 +4,7 @@ import store from "@/store";
 interface GetDeviceListParams {
   pageNum: number;
   pageSize: number;
-  type: string;
+  type: number;
   countryCode?: string;
   startTime?: any;
   endTime?: any;
@@ -24,9 +24,9 @@ export function getCountryCodeList(): Promise<any> {
 
 export function getAllDeviceInfo(params: GetDeviceListParams): Promise<any> {
   const send: any = { ...params };
-  if (send.countryCode === "-1") {
-    delete send.countryCode;
-  }
+  // if (send.countryCode === "-1") {
+  //   delete send.countryCode;
+  // }
   send.userId = store.state.userId;
   // send.userEmail = "zhuangzi200323@163.com";
   return HttpService.httpPost("/bi/getAllDeviceInfo", send);

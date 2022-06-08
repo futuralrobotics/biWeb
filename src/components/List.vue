@@ -8,7 +8,6 @@
       ref="myTable"
       :data="tableData"
       class="double-list-table"
-      :style="$slots.topbar ? 'padding-top: 12px;' : null"
       style="width: 100%"
     >
       <slot></slot>
@@ -67,7 +66,17 @@ export default class List extends Vue {
   created() {
     if (this.automaticMaxHeight) {
       this.$nextTick(() => {
-        this.maxHeight = this.$refs.myTable.$el.offsetHeight;
+        const childen = this.$refs.myTable.$el.children;
+        let headerDom;
+        for (let i = 0; i < childen.length; i++) {
+          const item = childen[i];
+          if (item._prevClass === "el-table__header-wrapper") {
+            headerDom = item;
+            break;
+          }
+        }
+        this.maxHeight =
+          this.$refs.myTable.$el.offsetHeight - (headerDom?.offsetHeight || 0);
       });
     }
     this.autoInit && this.init();

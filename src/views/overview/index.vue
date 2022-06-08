@@ -2,11 +2,8 @@
   <div class="overview">
     <img class="overview-bg" src="../../assets/world-bg.png" alt="" />
     <div class="title">
-      <!-- <div class="left-s"></div> -->
-      <div class="text">
-        <img src="../../assets/logo-color.png" />Futural Robotics 驾驶舱
-      </div>
-      <div class="right-s"></div>
+      <img src="../../assets/logo-color.png" />
+      <span>Futural Robotics 驾驶舱</span>
     </div>
     <div class="midden">
       <ul>
@@ -154,18 +151,18 @@ export default class Overview extends Vue {
     transform: translate(-50%);
   }
   .title {
-    height: 16%;
+    // height: 16%;
+    line-height: 2.2;
     text-align: center;
-    // > div {
-    //   display: inline-block;
-    // }
-    .text {
-      img {
-        margin-right: 1rem;
-      }
-      font-size: 3rem;
+    img {
+      vertical-align: middle;
+      margin-right: 2vw;
+      // margin-top: 10px;
+    }
+    span {
+      font-size: 6.6vh;
+      vertical-align: middle;
       color: #ffffff;
-      padding: 1rem 0;
       // border: 5px solid rgba(205, 222, 252, 1);
       // border-bottom: 1px solid rgba(205, 222, 252, 1);
       // box-shadow: inset -4px -4px 4px 8px rgba(205, 222, 252, 1);
@@ -190,37 +187,35 @@ export default class Overview extends Vue {
     border-radius: 20px;
   }
   .midden {
-    height: 16%;
     ul {
-      width: 90%;
+      width: 90vw;
       display: flex;
       margin: 0 auto;
       li {
         flex: 1;
-        padding: 2%;
-        float: left;
+        padding: 2vh;
         .midden-item {
           position: relative;
           text-align: center;
           font-weight: 600;
           h5 {
-            font-size: 1.5rem;
+            font-size: 2vw;
             color: #7fe3f9;
             margin: 0;
           }
           &-num {
-            font-size: 2rem;
+            font-size: 2vw;
             color: rgba(0, 155, 255, 0.99);
           }
           &-unit {
             color: #ffffff;
             position: absolute;
-            font-size: 1rem;
-            bottom: 10px;
-            right: 10px;
+            font-size: 1.2vw;
+            bottom: 0.4vw;
+            right: 1vw;
           }
           &-unit-time {
-            font-size: 1rem;
+            font-size: 1.2vw;
             color: #ffffff;
           }
         }
@@ -229,29 +224,28 @@ export default class Overview extends Vue {
   }
   .bottom {
     flex: 1;
-    padding: 5%;
+    padding: 3vh 3vw;
     &-world {
       position: absolute;
-      width: 55%;
-      bottom: -5%;
+      width: 50vw;
       left: 50%;
       transform: translate(-50%);
     }
     &-box {
-      width: 20%;
+      width: 20vw;
       height: 100%;
       color: #7fe3f9;
-      padding: 2%;
+      padding: 2vh;
     }
     &-title {
-      font-size: 1.2rem;
+      font-size: 1.3vw;
       text-align: center;
     }
     &-item {
       padding: 3%;
       &-num {
         width: 70%;
-        height: 1rem;
+        height: 1.3vw;
         position: relative;
         &-bg {
           float: right;
